@@ -1,73 +1,53 @@
-# React + TypeScript + Vite
+# 🚴‍♂️ Cycling Events Web Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+_Plataforma web para descubrir y explorar eventos de ciclismo con un diseño limpio, visual y enérgico._
+_Construida con enfoque en claridad, ritmo visual y experiencia moderna._
 
-Currently, two official plugins are available:
+## 🧩 Páginas principales
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. Events Discovery Page
 
-## React Compiler
+-   Hero con imagen cinematográfica y CTA principal.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+-   Barra de filtros (fecha, ubicación, dificultad).
 
-## Expanding the ESLint configuration
+-   Grid de 3 columnas con tarjetas de eventos.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+-   Animaciones suaves y composición aireada.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+2. Event Detail Page
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+-   Header sticky con botón “Register”.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+-   Banner de imagen completa con detalles del evento.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+-   Tarjeta flotante con datos clave (distancia, dificultad, etc.).
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+-   Sección con pestañas: Fotos, Ruta y Ediciones anteriores.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+3. User Profile Page
+
+-   Perfil del usuario con foto y opción de editar.
+
+-   Pestañas: My Events y Settings.
+
+### 🎨 Diseño
+
+Creado a partir de mockups, haciendo uso de la herramiento [Stitch - Design with AI](https://stitch.withgoogle.com/)
+
+Puedes ver la preview del proyecto ingresando al siguiente link:
+[Mockups](https://stitch.withgoogle.com/u/1/projects/566685928025800631?pli=1)
+
+### 🚧 Estado actual
+
+Frontend en desarrollo: estructura de páginas y componentes principales implementados.
+Backend, base de datos y despliegue aún no integrados.
+
+### 🧰 Stack de desarrollo
+
+React + Typescript
+Vite js
+
+### 👤 Autor
+
+Diseño y desarrollo por isantidev.
