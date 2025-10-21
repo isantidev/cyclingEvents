@@ -1,3 +1,5 @@
+// import HeroBanner from "./components/Hero/HeroBanner";
+
 function App() {
     return (
         <main className="max-w-2xl">
