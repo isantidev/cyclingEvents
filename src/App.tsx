@@ -1,5 +1,4 @@
 // import HeroBanner from "./components/Hero/HeroBanner";
-import Button from "./components/Button/Button";
 
 function App() {
     return (
@@ -7,7 +6,6 @@ function App() {
             <h1 className="text-5xl font-extrabold">
                 ¡Encuentra tu proximo reto!
             </h1>
-            <Button children="text" />
         </main>
     );
 }
