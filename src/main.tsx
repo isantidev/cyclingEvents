@@ -6,7 +6,7 @@ import Navbar from "./components/Nav/Navbar.tsx";
 
 createRoot(document.getElementById("root")!).render(
     <StrictMode>
-        <header>
+        <header className="sticky w-full top-0 z-900 flex justify-center items-center shadow-md bg-[#f5f7f8]">
             <Navbar />
         </header>
         <App />
