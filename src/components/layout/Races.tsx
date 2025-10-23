@@ -1,6 +1,6 @@
 import RaceCard from "../Card/RaceCard";
 import type { RaceCardProps } from "../../types/race";
-import Search from "../Search/Search";
+// import Search from "../Search/Search";
 
 type RacesProps = {
     races: RaceCardProps[];
@@ -13,7 +13,7 @@ const Races = ({ races }: RacesProps) => {
                 <input type="date" name="race-date" id="input-race-date" />
                 <input type="text" name="race-filter" id="input-race-filter" />
 
-                <Search />
+                {/* <Search /> */}
             </search>
             <section className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 auto-rows-fr gap-8">
                 {races.map((race) => {
