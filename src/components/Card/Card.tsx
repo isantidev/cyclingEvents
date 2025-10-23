@@ -1,20 +1,25 @@
-type CardProps = {
+export type RaceDate = {
+    day: number;
+    weekday: string;
+    month: string;
+    year: number;
+};
+
+export type RaceLocation = {
+    city: string;
+    abbreviation?: string;
+};
+
+// components/RaceCard.tsx
+export type RaceCardProps = {
     title: string;
     href: string;
     image: string;
-    date: {
-        day: number;
-        weekday: string;
-        month: string;
-        year: number;
-    };
-    location: {
-        city: string;
-        abbreviation?: string;
-    };
+    date: RaceDate;
+    location: RaceLocation;
 };
 
-const Card = ({ title, href, image, date, location }: CardProps) => {
+const Card = ({ title, href, image, date, location }: RaceCardProps) => {
     const { weekday, month, day, year } = date;
     const { city, abbreviation } = location;
 
