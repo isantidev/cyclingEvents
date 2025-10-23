@@ -12,9 +12,10 @@ export type RaceLocation = {
 
 // components/RaceCard.tsx
 export type RaceCardProps = {
+    id: number;
     title: string;
-    href: string;
-    image: string;
+    slug: string; // Para redireccionar
+    imageUrl: string;
     date: RaceDate;
     location: RaceLocation;
 };
