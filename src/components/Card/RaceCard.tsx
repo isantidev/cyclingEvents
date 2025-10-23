@@ -14,29 +14,27 @@ const Card = ({ id, title, slug, imageUrl, date, location }: RaceCardProps) => {
     return (
         <article
             id={`race-${id}`}
-            className="relative rounded-xl overflow-hidden min-h-96 bg-zinc-50"
+            className="rounded-xl overflow-hidden pb-4 bg-zinc-50 flex flex-col"
         >
-            <a href={slug}>
+            <a href={slug} className="aspect-3/2 overflow-hidden block">
                 <img
                     src={imageUrl}
-                    alt=""
-                    className="aspect-3/2 object-cover max-h-60"
+                    alt={`race image: ${title}`}
+                    className="size-full object-cover"
                 />
             </a>
-            <div className="px-4 mt-7 mb-2 flex flex-col">
+            <div className="px-4 mt-8 mb-4 flex flex-col flex-1">
                 <a href={slug} className="font-medium text-xl">
                     {title}
                 </a>
-                <p className="md:text-lg text-black/60 pb-2 md:pb-4">
-                    {raceInfoSpan}
-                </p>
-                <a
-                    href={slug}
-                    className="text-lg mt-2 text-blue-400 hover:text-blue-600"
-                >
-                    Ver detalles
-                </a>
+                <p className="md:text-lg text-black/60">{raceInfoSpan}</p>
             </div>
+            <a
+                href={slug}
+                className="text-lg mt-auto px-4 text-blue-600 hover:text-blue-800"
+            >
+                Ver detalles
+            </a>
         </article>
     );
 };
