@@ -1,13 +1,36 @@
+type weekday =
+    | "Lunes"
+    | "Martes "
+    | "Miercoles"
+    | "Jueves"
+    | "Viernes"
+    | "Sabado "
+    | "Domingo";
+
+type month =
+    | "Enero"
+    | "Febrero"
+    | "Marzo"
+    | "Abril"
+    | "Mayo"
+    | "Junio"
+    | "Julio"
+    | "Agosto"
+    | "Septiembre"
+    | "Octubre"
+    | "Noviembre"
+    | "Diciembre";
+
 export type RaceDate = {
     day: number;
-    weekday: string;
-    month: string;
+    weekday: weekday;
+    month: month;
     year?: number | 2025;
 };
 
 export type RaceLocation = {
     city: string;
-    abbreviation?: string;
+    department?: string;
 };
 
 // components/RaceCard.tsx
