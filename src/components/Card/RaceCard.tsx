@@ -2,13 +2,13 @@ import type { RaceCardProps } from "../../types/race";
 
 const Card = ({ id, title, slug, imageUrl, date, location }: RaceCardProps) => {
     const { weekday, month, day, year } = date;
-    const { city, abbreviation } = location;
+    const { city, department } = location;
 
     const dateSpan = `${weekday.slice(0, 3)}, ${month.slice(
         0,
         3
     )} ${day}, ${year}`;
-    const locationSpan = `${city}${abbreviation ? `, ${abbreviation}` : ""}.`;
+    const locationSpan = `${city}${department ? `, ${department}` : ""}.`;
     const raceInfoSpan = `${dateSpan} - ${locationSpan}`;
 
     return (

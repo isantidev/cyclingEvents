@@ -1,5 +1,4 @@
 import HeroBanner from "./components/Hero/HeroBanner";
-// import Races from "./components/layout/Races";
 
 function App() {
     return (
