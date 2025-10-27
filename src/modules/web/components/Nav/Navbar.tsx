@@ -1,4 +1,4 @@
-import Button from "../Button/Button";
+import Button from "@modules/web/components/Button/Button";
 
 const Navbar = () => {
     return (

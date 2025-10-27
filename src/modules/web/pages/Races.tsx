@@ -1,5 +1,5 @@
-import RaceCard from "../Card/RaceCard";
-import type { RaceCardProps } from "../../types/race";
+import RaceCard from "@modules/web/components/Card/RaceCard";
+import type { RaceCardProps } from "@shared/types/race.types";
 // import Search from "../Search/Search";
 
 type RacesProps = {

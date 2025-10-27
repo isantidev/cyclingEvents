@@ -1,4 +1,4 @@
-import type { RaceCardProps } from "../../types/race";
+import type { RaceCardProps } from "@shared/types/race.types";
 
 const Card = ({ id, title, slug, imageUrl, date, location }: RaceCardProps) => {
     const { weekday, month, day, year } = date;

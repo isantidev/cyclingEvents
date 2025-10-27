@@ -1,4 +1,4 @@
-import HeroBanner from "./components/Hero/HeroBanner";
+import HeroBanner from "@modules/web/components/Hero/HeroBanner";
 
 function App() {
     return (

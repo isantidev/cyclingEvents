@@ -9,8 +9,9 @@
         "skipLibCheck": true,
         "baseUrl": ".",
         "paths": {
-            "@components/*": ["src/components/*"],
-            "@/*": ["src/*"]
+            "@/*": ["src/*"],
+            "@modules/*": ["src/modules/*"],
+            "@shared/*": ["src/shared/*"]
         },
 
         /* Bundler mode */
