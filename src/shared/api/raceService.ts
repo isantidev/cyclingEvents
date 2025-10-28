@@ -1,4 +1,4 @@
-import type { Race } from "../shared/types/race.types";
+import type { Race } from "@shared/types/race.types";
 
 export const raceService = {
     getAll: async (): Promise<Race[]> => {
