@@ -1,9 +1,9 @@
 import RaceCard from "@modules/web/components/Card/RaceCard";
-import type { Race } from "@shared/types/race.types";
+import type { RaceCardProps } from "@shared/types/race.types";
 // import Search from "../Search/Search";
 
 type RacesProps = {
-    races: Race[];
+    races: RaceCardProps[];
 };
 
 const Races = ({ races }: RacesProps) => {
