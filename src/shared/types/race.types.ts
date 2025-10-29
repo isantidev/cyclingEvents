@@ -13,7 +13,7 @@ export type Race = {
     title: string;
     slug: string; // Para redireccionar
     imageUrl: string;
-    date: string;
+    processedDate: DateProps;
     location: string;
 };
 
