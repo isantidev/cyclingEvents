@@ -21,7 +21,7 @@ export async function fetchCitiesByDepartment(
 }
 
 // Fetch city by id
-export async function fetchCityById(cityId: number): Promise<City> {
+export async function fetchCityById(cityId: string): Promise<City> {
     const response = await fetch(`${API_BASE_URL}/City/${cityId}`);
     if (!response.ok) throw new Error("Failed to fetch city");
     return response.json();
@@ -45,7 +45,7 @@ export async function searchCities(keyword: string): Promise<City[]> {
 }
 
 // Fetch city's and deparment's name
-export async function fetchCityWithDepartment(city_id: number): Promise<{
+export async function fetchCityWithDepartment(city_id: string): Promise<{
     city: City;
     department: Department;
 }> {
