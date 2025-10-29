@@ -1,4 +1,4 @@
-import type { Race } from "@shared/types/race.types";
+import type { RaceCardProps } from "@shared/types/race.types";
 
 const Card = ({
     id,
@@ -9,6 +9,7 @@ const Card = ({
     location,
 }: Race) => {
     const { weekday, month, day, year } = processedDate;
+
     const { city, department } = location;
 
     const dateSpan = `${weekday.slice(0, 3)}, ${month.slice(

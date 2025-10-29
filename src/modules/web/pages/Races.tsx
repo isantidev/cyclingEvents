@@ -6,6 +6,7 @@ import type { RaceWithProcessedData } from "@shared/types/race.types";
 const Races = () => {
     const { races, error, isLoading } = useRaces();
     if (error) console.error(error);
+    
     return (
         <>
             <search className="w-full">
