@@ -17,7 +17,7 @@ const RaceCaption = ({
         <>
             <div
                 className={
-                    "absolute bottom-0 left-0 flex flex-col w-full p-4 md:p-10 gap-2 justify-end" +
+                    "absolute bottom-0 left-0 flex flex-col w-full p-6 md:p-10 gap-2 justify-end" +
                     " " +
                     className
                 }
@@ -42,12 +42,19 @@ const RaceCaption = ({
 
 const HeroBanner = () => {
     return (
-        <section
-            className="max-w-6xl w-full aspect-3/4 md:aspect-video xl:aspect-2/1 bg-center bg-cover bg-no-repeat my-0 mx-auto overflow-hidden rounded-xl
-            bg-[url(https://imgs.search.brave.com/OmSvzmQH1CIk1KjxWa6au7BmRqmXx_rRydK3Owh9IsY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zcGly/b2JpY3ljbGVzLmNv/bS9jZG4vc2hvcC9m/aWxlcy9qcGVnLW9w/dGltaXplcl9iaWNp/Y2xldGFfbXRiX291/dGRvb3JfLTEyLmpw/Zz9jcm9wPWNlbnRl/ciZoZWlnaHQ9MjQ4/OCZ2PTE3NTMwNTQ5/NTQmd2lkdGg9Mzcz/Mg)] 
-            relative"
-        >
-            <span className="absolute size-full bg-linear-to-tr from-black  to-transparent"></span>
+        <section className="relative max-w-[1600px] w-full aspect-3/5 md:aspect-video xl:aspect-9/4 overflow-hidden rounded-xl">
+            <picture className="absolute inset-0 size-full">
+                <source
+                    srcSet="https://imgs.search.brave.com/-uouqoCsoDhSOT20M6aCLYmobYMV0JJh5yHGXUt5mJ4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL00v/TVY1Qk5qRTFORE00/WWprdE5EWmhOeTAw/WVRCakxUaGxObVV0/Wm1Vd01HSXpZV1Zr/TURNeVhrRXlYa0Zx/Y0djQC5qcGc"
+                    media="(width <= 767px)"
+                />
+                <img
+                    src="https://imgs.search.brave.com/OmSvzmQH1CIk1KjxWa6au7BmRqmXx_rRydK3Owh9IsY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zcGly/b2JpY3ljbGVzLmNv/bS9jZG4vc2hvcC9m/aWxlcy9qcGVnLW9w/dGltaXplcl9iaWNp/Y2xldGFfbXRiX291/dGRvb3JfLTEyLmpw/Zz9jcm9wPWNlbnRl/ciZoZWlnaHQ9MjQ4/OCZ2PTE3NTMwNTQ5/NTQmd2lkdGg9Mzcz/Mg"
+                    alt=""
+                    className="size-full object-cover"
+                />
+            </picture>
+            <span className="absolute size-full bg-linear-to-tr from-zinc-950 to-transparent"></span>
             <RaceCaption />
         </section>
     );
