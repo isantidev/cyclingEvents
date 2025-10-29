@@ -3,16 +3,6 @@ import type { DateProps } from "./date.types";
 export type RaceCategory = "MTB" | "Gravel" | "Road";
 export type RaceDifficulty = "easy" | "mid" | "advanced";
 
-// components/RaceCard.tsx
-export type RaceCardProps = {
-    id: number;
-    title: string;
-    slug: string; // Para redireccionar
-    imageUrl: string;
-    date: RaceDate;
-    location: RaceLocation;
-};
-
 export type Race = {
     id: string;
     title: string;
