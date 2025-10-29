@@ -3,22 +3,17 @@ import type { DateProps } from "./date.types";
 export type RaceCategory = "MTB" | "Gravel" | "Road";
 export type RaceDifficulty = "easy" | "mid" | "advanced";
 
-export type RaceLocation = {
-    city: string;
-    department?: string;
-};
-
 export type Race = {
     id: string;
     title: string;
-    slug: string; // Para redireccionar
-    imageUrl: string;
+    slug: string;
+    image_url: string;
     processedDate: DateProps;
-    location: string;
+    location: LocationProps;
 };
 
 export interface RaceProps {
-    id: string;
+    race_id: string;
     organizer_id: string;
     title: string;
     slug: string;
@@ -30,7 +25,7 @@ export interface RaceProps {
     max_participants: number;
     registration_closes_at?: string;
     race_date: string;
-    image_url: string | null;
+    image_url: string;
     created_at: string;
     location_city_id: number;
     location_goal_city?: number;
@@ -46,6 +41,12 @@ export interface RaceFilters {
     keyword?: string;
 }
 
-export interface RaceWithProcessedDate extends RaceProps {
+export type LocationProps = {
+    city: string;
+    department: string;
+};
+
+export interface RaceWithProcessedData extends RaceProps {
     processedDate: DateProps;
+    location: LocationProps;
 }
