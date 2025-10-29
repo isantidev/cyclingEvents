@@ -1,7 +1,14 @@
-import type { RaceCardProps } from "@shared/types/race.types";
+import type { Race } from "@shared/types/race.types";
 
-const Card = ({ id, title, slug, imageUrl, date, location }: RaceCardProps) => {
-    const { weekday, month, day, year } = date;
+const Card = ({
+    id,
+    title,
+    slug,
+    image_url,
+    processedDate,
+    location,
+}: Race) => {
+    const { weekday, month, day, year } = processedDate;
     const { city, department } = location;
 
     const dateSpan = `${weekday.slice(0, 3)}, ${month.slice(
@@ -18,9 +25,10 @@ const Card = ({ id, title, slug, imageUrl, date, location }: RaceCardProps) => {
         >
             <a href={slug} className="aspect-3/2 overflow-hidden block">
                 <img
-                    src={imageUrl}
+                    src={image_url}
                     alt={`race image: ${title}`}
                     className="size-full object-cover"
+                    loading="lazy"
                 />
             </a>
             <div className="px-4 mt-8 mb-4 flex flex-col flex-1">

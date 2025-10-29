@@ -1,12 +1,12 @@
-import RaceCard from "@modules/web/components/Card/RaceCard";
-import type { RaceCardProps } from "@shared/types/race.types";
+import Card from "@modules/web/components/Card/RaceCard";
+import { useRaces } from "@shared/hooks/useRaces";
+import type { RaceWithProcessedData } from "@shared/types/race.types";
 // import Search from "../Search/Search";
 
-type RacesProps = {
-    races: RaceCardProps[];
-};
-
-const Races = ({ races }: RacesProps) => {
+const Races = () => {
+    const { races, error, isLoading } = useRaces();
+    if (error) console.error(error);
+    
     return (
         <>
             <search className="w-full">
@@ -15,21 +15,26 @@ const Races = ({ races }: RacesProps) => {
 
                 {/* <Search /> */}
             </search>
-            <section className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 auto-rows-fr gap-8">
-                {races.map((race) => {
-                    return (
-                        <RaceCard
-                            key={`race-card-${race.id}`}
-                            id={race.id}
-                            title={race.title}
-                            slug={`/races/${race.slug}`}
-                            imageUrl={race.imageUrl}
-                            date={race.date}
-                            location={race.location}
-                        />
-                    );
-                })}
-            </section>
+
+            {isLoading && <p>Tus proximos retos están cargando...</p>}
+            {error && <p>Ha ocurrido un problema al cargas las carreras...</p>}
+            {races && !error && isLoading == false && (
+                <section className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 auto-rows-fr gap-8">
+                    {races.map((race: RaceWithProcessedData) => {
+                        return (
+                            <Card
+                                key={race.race_id}
+                                id={"race-card" + race.race_id}
+                                title={race.title}
+                                slug={race.slug}
+                                image_url={race.image_url}
+                                processedDate={race.processedDate}
+                                location={race.location}
+                            />
+                        );
+                    })}
+                </section>
+            )}
         </>
     );
 };
