@@ -25,7 +25,6 @@ const Navbar = ({ links }: NavbarProps) => {
             </div>
             <ul className="inline-flex gap-2 lg:gap-8 [&_a]:px-1 [&_a]:py-0.5 [&_a]:font-light [&_a]:text-md [&_a]:lg:text-lg [&_a]:hover:text-blue-600">
                 {links.map((link: NavLink) => {
-                    console.log(link.to);
                     return (
                         <Link key={link.to} to={link.to}>
                             {link.label}

@@ -43,8 +43,6 @@ export const useRaces = () => {
 
                 const cityIds = data.map((race) => race.location_city_id);
 
-                console.log(`Preloading locations for ${data.length} races...`);
-
                 await preloadLocations(cityIds);
 
                 const processedRaces = await Promise.all(
@@ -57,7 +55,6 @@ export const useRaces = () => {
 
                 setRaces(processedRaces);
             } catch (err) {
-                console.error("Erros loading races: ", err);
                 setError(err as PostgrestError);
             } finally {
                 setIsLoading(false);
@@ -65,8 +62,6 @@ export const useRaces = () => {
         }
         loadRaces();
     }, [getLocation, preloadLocations]);
-
-    console.log(races);
 
     return { races, error, isLoading };
 };

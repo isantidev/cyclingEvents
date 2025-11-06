@@ -13,12 +13,10 @@ export const useLocationCache = () => {
         async (city_id: number): Promise<LocationProps> => {
             // Cache hit: retornar inmediatamente
             if (cache.has(city_id)) {
-                console.log(`✅ Cache HIT for city_id: ${city_id}`);
                 return cache.get(city_id)!;
             }
 
             // Cache miss: hacer fetch
-            console.log(`⬇️ Cache MISS for city_id: ${city_id} - Fetching...`);
 
             try {
                 const data = await fetchCityAndDepartment(city_id);
@@ -29,7 +27,6 @@ export const useLocationCache = () => {
 
                 // Guardar en caché para futuros usos
                 cache.set(city_id, location);
-                console.log(`💾 Cached city_id: ${city_id} - ${location.city}`);
 
                 return location;
             } catch (error) {
@@ -59,21 +56,12 @@ export const useLocationCache = () => {
             );
 
             if (uniqueIds.length === 0) {
-                console.log("🎯 All locations already in cache");
                 return;
             }
-
-            console.log(
-                `🔄 Preloading ${uniqueIds.length} locations:`,
-                uniqueIds
-            );
 
             // Fetchear todas en paralelo con Promise.all
             try {
                 await Promise.all(uniqueIds.map((id) => getLocation(id)));
-                console.log(
-                    `✨ Successfully preloaded ${uniqueIds.length} locations`
-                );
             } catch (error) {
                 console.error("❌ Error preloading locations:", error);
                 // No lanzamos el error, algunas ubicaciones pueden haberse cargado
@@ -83,9 +71,8 @@ export const useLocationCache = () => {
     );
 
     const clearCache = useCallback(() => {
-        const previousSize = cache.size;
+        // const previousSize = cache.size;
         cache.clear();
-        console.log(`🗑️ Cache cleared - Removed ${previousSize} entries`);
     }, [cache]);
 
     const hasLocation = useCallback(
