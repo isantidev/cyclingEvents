@@ -5,7 +5,7 @@ const FeaturedRaces = () => {
     const { races, error, isLoading } = useRaces();
 
     return (
-        <section className="grid grid-flow-row md:grid-cols-2 xl:grid-cols-3 justify-center items-center gap-4">
+        <section className="grid grid-flow-row md:grid-cols-2 xl:grid-cols-3 justify-center items-center gap-4 md:gap-8 px-4 lg:px-8">
             {isLoading && <p>Tus próximos retos están cargando</p>}
             {!isLoading && error && (
                 <p>Ha ocurrido un error al cargar las próximas carreras</p>

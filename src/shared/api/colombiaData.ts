@@ -1,60 +1,147 @@
-import type { Department, City } from "@shared/types/colombiaData.types";
+import supabase from "./supabase-client";
+import type {
+    Department,
+    City,
+    Filters,
+    CityWithDepartment,
+    DepartmentWithCities,
+} from "@shared/types/colombiaData.types";
 
-const API_BASE_URL = "https://api-colombia.com/api/v1";
+// Fetch the departments or in case of filter fetch one departmetn
+export async function fetchDepartments(
+    filters?: Filters
+): Promise<Department[]> {
+    let query = supabase.from("Departments").select("*");
 
-// Fetch all deparments
-export async function fetchDepartments(): Promise<Department[]> {
-    const response = await fetch(`${API_BASE_URL}/Department`);
-    if (!response.ok) throw new Error("Failed to fetch departments");
-    return response.json();
+    if (filters?.department_id) {
+        query = query.eq("id", filters.department_id);
+    }
+
+    if (filters?.department_name) {
+        query = query.eq("department_name", filters.department_name);
+    }
+
+    const { data, error } = await query;
+
+    if (error) {
+        throw new Error(`Failed to fetch departments: ${error.message}`);
+    }
+
+    return data || [];
 }
 
-// Fetch cities by deparment
-export async function fetchCitiesByDepartment(
-    departmentId: number
-): Promise<City[]> {
-    const response = await fetch(
-        `${API_BASE_URL}/Department/${departmentId}/cities`
-    );
-    if (!response.ok) throw new Error("Failed to fetch cities");
-    return response.json();
+// Fetch all the cities or filter them
+export async function fetchCities(filters?: Filters): Promise<City[]> {
+    let query = supabase.from("Cities").select("*");
+
+    if (filters?.department_id) {
+        query = query.eq("department_id", filters.department_id);
+    }
+
+    if (filters?.city_id) {
+        query = query.eq("id", filters.city_id);
+    }
+
+    if (filters?.city_name) {
+        query = query.eq("name", filters.city_name); // Note: using 'name' based on your type
+    }
+
+    const { data, error } = await query;
+
+    if (error) {
+        throw new Error(`Failed to fetch cities: ${error.message}`);
+    }
+
+    return data || [];
 }
 
-// Fetch city by id
-export async function fetchCityById(cityId: string): Promise<City> {
-    const response = await fetch(`${API_BASE_URL}/City/${cityId}`);
-    if (!response.ok) throw new Error("Failed to fetch city");
-    return response.json();
+// Fetch cities with their department info using join
+export async function fetchCitiesWithDepartments(
+    filters?: Filters
+): Promise<CityWithDepartment[]> {
+    let query = supabase.from("Cities").select(`
+            *,
+            Departments (
+                id,
+                department_name
+            )
+        `);
+
+    if (filters?.department_id) {
+        query = query.eq("department_id", filters.department_id);
+    }
+
+    if (filters?.city_id) {
+        query = query.eq("id", filters.city_id);
+    }
+
+    if (filters?.city_name) {
+        query = query.eq("name", filters.city_name);
+    }
+
+    const { data, error } = await query;
+
+    if (error) {
+        throw new Error(
+            `Failed to fetch cities with departments: ${error.message}`
+        );
+    }
+
+    return data || [];
 }
 
-// Fetch city by name
-export async function fetchCityByName(cityName: string): Promise<City> {
-    const response = await fetch(`${API_BASE_URL}/City/name/${cityName}`);
-    if (!response.ok) throw new Error("Failed to fetch city");
-    return response.json();
+// Optimized: fetch single city with department in one query
+export async function fetchCityAndDepartment(
+    city_id: number
+): Promise<CityWithDepartment> {
+    const { data, error } = await supabase
+        .from("Cities")
+        .select(
+            `
+            *,
+            Departments (*)
+        `
+        )
+        .eq("id", city_id)
+        .single();
+
+    if (error) {
+        throw new Error(
+            `Failed to fetch city and department: ${error.message}`
+        );
+    }
+
+    if (!data) {
+        throw new Error(`City with id ${city_id} not found`);
+    }
+
+    return data as CityWithDepartment;
 }
 
-// Fetch cities by a keyword
-export async function searchCities(keyword: string): Promise<City[]> {
-    if (!keyword.trim()) return [];
-    const response = await fetch(
-        `${API_BASE_URL}/City/search/${encodeURIComponent(keyword)}`
-    );
-    if (!response.ok) throw new Error("Failed to search cities");
-    return response.json();
-}
+// Fetch departments with all their cities
+export async function fetchDepartmentsWithCities(
+    filters?: Filters
+): Promise<DepartmentWithCities[]> {
+    let query = supabase.from("Departments").select(`
+            *,
+            Cities (*)
+        `);
 
-// Fetch city's and deparment's name
-export async function fetchCityWithDepartment(city_id: string): Promise<{
-    city: City;
-    department: Department;
-}> {
-    const city = await fetchCityById(city_id);
-    const response = await fetch(
-        `${API_BASE_URL}/Department/${city.departmentId}`
-    );
-    if (!response.ok) throw new Error("Failed to fetch department");
-    const department = await response.json();
+    if (filters?.department_id) {
+        query = query.eq("id", filters.department_id);
+    }
 
-    return { city, department };
+    if (filters?.department_name) {
+        query = query.eq("department_name", filters.department_name);
+    }
+
+    const { data, error } = await query;
+
+    if (error) {
+        throw new Error(
+            `Failed to fetch departments with cities: ${error.message}`
+        );
+    }
+
+    return data || [];
 }
