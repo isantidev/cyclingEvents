@@ -4,7 +4,7 @@ export type RaceCategory = "MTB" | "Gravel" | "Road";
 export type RaceDifficulty = "easy" | "mid" | "advanced";
 
 export type Race = {
-    id: string;
+    race_id: string;
     title: string;
     slug: string;
     image_url: string;
