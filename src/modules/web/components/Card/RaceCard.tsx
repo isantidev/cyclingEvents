@@ -23,7 +23,7 @@ const Card = ({
             id={`race-${id}`}
             className="rounded-xl overflow-hidden pb-4 bg-zinc-50 flex flex-col"
         >
-            <a href={slug} className="aspect-3/2 overflow-hidden block">
+            <a href={slug} className="aspect-5/3 overflow-hidden block">
                 <img
                     src={image_url}
                     alt={`race image: ${title}`}
