@@ -1,6 +1,14 @@
-import Button from "@modules/web/components/Button/Button";
+import type { NavLink } from "@/shared/types/routes.types";
+import { Link } from "react-router-dom";
 
-const Navbar = () => {
+interface NavbarProps {
+    links: NavLink[];
+}
+
+const Navbar = ({ links }: NavbarProps) => {
+    if (!links || links.length === 0) {
+        return null; // or return a fallback UI
+    }
     return (
         <nav className="@container flex justify-between items-center max-h-20 max-w-[1600px] w-full py-2 px-6">
             <div className="inline-flex justify-between items-center gap-2 md:gap-10">
@@ -14,21 +22,20 @@ const Navbar = () => {
                         Eventos de Ciclismo
                     </h1>
                 </figure>
-                <ul className="inline-flex gap-2 lg:gap-8 [&_a]:px-1 [&_a]:py-0.5 [&_a]:font-light [&_a]:text-md [&_a]:lg:text-lg [&_a]:hover:text-blue-600">
-                    <a href="#">Inicio</a>
-                    <a href="#">Eventos</a>
-                    <a href="#">Acerca de</a>
-                </ul>
             </div>
+            <ul className="inline-flex gap-2 lg:gap-8 [&_a]:px-1 [&_a]:py-0.5 [&_a]:font-light [&_a]:text-md [&_a]:lg:text-lg [&_a]:hover:text-blue-600">
+                {links.map((link: NavLink) => {
+                    return (
+                        <Link key={link.to} to={link.to}>
+                            {link.label}
+                        </Link>
+                    );
+                })}
+            </ul>
             <div className="inline-flex items-center gap-2 md:gap-8">
-                <Button className="hidden @md:block">Crear Evento</Button>
-                <button>
-                    <img
-                        src="https://imgs.search.brave.com/nHMxSTFU3nCmgjp0KtjL-CBt5EKNgo5MWEy_dRVc5bY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/aWNvbnNjb3V0LmNv/bS9pY29uL3ByZW1p/dW0vcG5nLTI1Ni10/aHVtYi9wcm9maWxl/LXBpYy1jaXJjbGUt/aWNvbi1zdmctZG93/bmxvYWQtcG5nLTcy/NjU5MTQucG5nP2Y9/d2VicCZ3PTEyOA"
-                        alt="usuario"
-                        className="aspect-square max-h-14 md:p-2"
-                    />
-                </button>
+                <Link className="button-style" to={"client/auth"}>
+                    Área del Cliente
+                </Link>
             </div>
         </nav>
     );

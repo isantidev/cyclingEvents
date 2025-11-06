@@ -1,12 +1,9 @@
-import HeroBanner from "@modules/web/components/Hero/HeroBanner";
+import HomePage from "@modules/web/pages/HomePage";
 
 function App() {
     return (
-        <main className="max-w-7xl w-full mx-auto px-4 my-8 flex flex-col gap-8 lg:gap-16 justify-center items-center">
-            <HeroBanner />
-            <h1 className="text-5xl font-extrabold">
-                ¡Encuentra tu proximo reto!
-            </h1>
+        <main className="max-w-[1440px] w-full mx-auto px-4 my-4 flex flex-col justify-center items-center">
+            <HomePage />
         </main>
     );
 }

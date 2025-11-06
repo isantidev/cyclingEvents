@@ -3,3 +3,28 @@
 html {
     background-color: #f5f7f8;
 }
+
+.button-style {
+    max-width: 12rem;
+    width: fit-content;
+    padding-inline: 1rem;
+    padding-block: 0.5rem;
+    font-weight: 600;
+    text-wrap: pretty;
+    text-align: center;
+    background-color: var(--color-blue-600);
+    color: whitesmoke;
+    cursor: pointer;
+    border-radius: 0.5rem;
+
+    &:hover {
+        background-color: var(--color-blue-700);
+    }
+}
+
+@media (width >= 64rem) {
+    .button-style {
+        font-size: 1.125rem;
+        line-height: calc(1.75 / 1.125);
+    }
+}
