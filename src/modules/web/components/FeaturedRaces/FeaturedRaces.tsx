@@ -14,17 +14,7 @@ const FeaturedRaces = () => {
                 !isLoading &&
                 !error &&
                 races.map((race) => {
-                    return (
-                        <Card
-                            key={race.race_id}
-                            id={`race-card-${race.race_id}`}
-                            title={race.title}
-                            slug={race.slug}
-                            image_url={race.image_url}
-                            processedDate={race.processedDate}
-                            location={race.location}
-                        />
-                    );
+                    return <Card key={race.race_id} race_data={race} />;
                 })}
         </section>
     );
