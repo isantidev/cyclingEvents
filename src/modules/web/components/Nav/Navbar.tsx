@@ -1,5 +1,5 @@
 import type { NavLink } from "@/shared/types/routes.types";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 interface NavbarProps {
     links: NavLink[];
