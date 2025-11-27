@@ -1,5 +1,5 @@
 import type { Race } from "@shared/types/race.types";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 const Card = ({ race_data }: { race_data: Race }) => {
     const { weekday, month, day, year } = race_data.processedDate;
