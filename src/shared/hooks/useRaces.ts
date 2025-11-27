@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 // Normal imports
 import { monthNames, weekdayNames } from "@shared/types/date.types";
 import { fetchLimitedRaces } from "@shared/api/races";
@@ -26,42 +26,46 @@ export const useRaces = () => {
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const { getLocation, preloadLocations } = useLocationCache();
 
-    useEffect(() => {
-        async function loadRaces() {
-            try {
-                const { data, error } = await fetchLimitedRaces();
+    const loadRaces = useCallback(async () => {
+        try {
+            setIsLoading(true);
+            setError(null);
+            
+            const { data, error } = await fetchLimitedRaces();
 
-                if (error) {
-                    setError(error);
-                    return;
-                }
-
-                if (!data || data.length === 0) {
-                    setRaces([]);
-                    return;
-                }
-
-                const cityIds = data.map((race) => race.location_city_id);
-
-                await preloadLocations(cityIds);
-
-                const processedRaces = await Promise.all(
-                    data.map(async (race) => ({
-                        ...race,
-                        processedDate: processDate(race.race_date),
-                        location: await getLocation(race.location_city_id),
-                    }))
-                );
-
-                setRaces(processedRaces);
-            } catch (err) {
-                setError(err as PostgrestError);
-            } finally {
-                setIsLoading(false);
+            if (error) {
+                setError(error);
+                return;
             }
+
+            if (!data || data.length === 0) {
+                setRaces([]);
+                return;
+            }
+
+            const cityIds = data.map((race) => race.location_city_id);
+
+            await preloadLocations(cityIds);
+
+            const processedRaces = await Promise.all(
+                data.map(async (race) => ({
+                    ...race,
+                    processedDate: processDate(race.race_date),
+                    location: await getLocation(race.location_city_id),
+                }))
+            );
+
+            setRaces(processedRaces);
+        } catch (err) {
+            setError(err as PostgrestError);
+        } finally {
+            setIsLoading(false);
         }
-        loadRaces();
     }, [getLocation, preloadLocations]);
+
+    useEffect(() => {
+        loadRaces();
+    }, [loadRaces]);
 
     return { races, error, isLoading };
 };
