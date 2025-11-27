@@ -1,9 +1,9 @@
 import { BrowserRouter, Routes, Route } from "react-router";
-import HomePage from "@modules/web/pages/HomePage";
-import Navbar from "@modules/web/components/Nav/Navbar";
 import { webLinks } from "@shared/config/routes.config";
-import NotFound from "@shared/components/404";
+import Navbar from "@modules/web/components/Nav/Navbar";
+import HomePage from "@modules/web/pages/HomePage";
 import Races from "@modules/web/pages/Races";
+import NotFound from "@shared/components/404";
 
 function App() {
     return (
