@@ -5,9 +5,9 @@ import { fetchLimitedRaces } from "@shared/api/races";
 import { PostgrestError } from "@supabase/supabase-js";
 
 // Type imports
-import type { RaceWithProcessedData } from "@shared/types/race.types";
+import type { RaceWithProcessedData } from "@modules/races/race.types";
 import type { DateProps } from "@shared/types/date.types";
-import { useLocationCache } from "./useLocationCache";
+import { useLocationCache } from "@modules/geo/hooks/useLocationCache";
 
 function processDate(dateString: string): DateProps {
     const date = new Date(dateString);
@@ -30,7 +30,7 @@ export const useRaces = () => {
         try {
             setIsLoading(true);
             setError(null);
-            
+
             const { data, error } = await fetchLimitedRaces();
 
             if (error) {

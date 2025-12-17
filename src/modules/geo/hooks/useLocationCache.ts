@@ -1,7 +1,7 @@
 // hooks/useLocationCache.ts
 import { useState, useCallback } from "react";
-import { fetchCityAndDepartment } from "@shared/api/colombiaData";
-import type { LocationProps } from "@shared/types/race.types";
+import { fetchCityAndDepartment } from "@modules/geo/api/colombiaData";
+import type { LocationProps } from "@modules/races/race.types";
 
 const globalCache = new Map<number, LocationProps>();
 

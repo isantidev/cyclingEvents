@@ -1,5 +1,5 @@
-import supabase from "./supabase-client";
-import type { RaceFilters } from "@shared/types/race.types";
+import supabase from "@core/api/supabase-client";
+import type { RaceFilters } from "@modules/races/race.types";
 
 export async function fetchRaces(filters?: RaceFilters) {
     let query = supabase

@@ -1,4 +1,4 @@
-import type { DateProps } from "./date.types";
+import type { DateProps } from "../../shared/types/date.types";
 
 export type RaceCategory = "MTB" | "Gravel" | "Road";
 export type RaceDifficulty = "easy" | "mid" | "advanced";
