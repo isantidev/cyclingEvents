@@ -1,6 +1,6 @@
 import supabase from "@core/api/supabase-client";
 import type { AppResult } from "@core/types/api";
-import type { Department } from "@modules/geo/colombiaData.types";
+import type { City, Department } from "@modules/geo/colombiaData.types";
 
 export async function fetchDepartments(): Promise<AppResult<Department[]>> {
     try {
@@ -15,6 +15,32 @@ export async function fetchDepartments(): Promise<AppResult<Department[]>> {
             department_name: item.department_name,
         }));
 
+        return { success: true, data: mappedData, error: null };
+    } catch (error) {
+        return {
+            success: false,
+            data: null,
+            error: "Unexpected network failure",
+        };
+    }
+}
+
+export async function fetchCitiesByDepartment(
+    department_id: City["department_id"]
+): Promise<AppResult<City[]>> {
+    try {
+        const { data, error } = await supabase
+            .from("Cities")
+            .select("id, city_name, department_id")
+            .eq("department_id", department_id);
+
+        if (error) return { success: false, data: null, error: error.message };
+
+        const mappedData: City[] = data.map((item) => ({
+            id: item.id,
+            city_name: item.city_name,
+            department_id: item.department_id,
+        }));
         return { success: true, data: mappedData, error: null };
     } catch (error) {
         return {
