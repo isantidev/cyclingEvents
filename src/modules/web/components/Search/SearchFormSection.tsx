@@ -1,6 +1,6 @@
 import { useState, useEffect, useId, useRef } from "react";
-import { fetchCities, fetchDepartments } from "@modules/geo/api/colombiaData";
-import type { Department, City } from "@modules/geo/colombiaData.types";
+import { fetchCities, fetchDepartments } from "@/modules/geo/api/colombiaData";
+import type { Department, City } from "@/modules/geo/colombiaData.types";
 
 const handleClearFilters = (
     e: React.MouseEvent<HTMLButtonElement>,

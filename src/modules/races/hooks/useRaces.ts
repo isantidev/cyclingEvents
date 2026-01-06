@@ -1,71 +1,49 @@
 import { useState, useEffect, useCallback } from "react";
-// Normal imports
-import { monthNames, weekdayNames } from "@shared/types/date.types";
-import { fetchLimitedRaces } from "@shared/api/races";
-import { PostgrestError } from "@supabase/supabase-js";
-
-// Type imports
+import { racesService } from "../services/races.service";
 import type { RaceWithProcessedData } from "@modules/races/race.types";
-import type { DateProps } from "@shared/types/date.types";
-import { useLocationCache } from "@modules/geo/hooks/useLocationCache";
-
-function processDate(dateString: string): DateProps {
-    const date = new Date(dateString);
-
-    return {
-        day: date.getDate(),
-        weekday: weekdayNames[date.getDay()],
-        month: monthNames[date.getMonth()],
-        year: date.getFullYear(),
-    };
-}
 
 export const useRaces = () => {
     const [races, setRaces] = useState<RaceWithProcessedData[]>([]);
-    const [error, setError] = useState<PostgrestError | null>(null);
+    const [error, setError] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(true);
-    const { getLocation, preloadLocations } = useLocationCache();
 
-    const loadRaces = useCallback(async () => {
+    const fetchRaces = useCallback(async (signal?: AbortSignal) => {
         try {
             setIsLoading(true);
-            setError(null);
+            setError(null); // Clear previous errors on new fetch
 
-            const { data, error } = await fetchLimitedRaces();
+            const response = await racesService.getUpcomingRaces();
 
-            if (error) {
-                setError(error);
-                return;
+            // Check abort before updating state
+            if (signal?.aborted) return;
+
+            if (response.success) {
+                console.log(response.data);
+                setRaces(response.data);
+            } else {
+                setError(response.error);
             }
-
-            if (!data || data.length === 0) {
-                setRaces([]);
-                return;
-            }
-
-            const cityIds = data.map((race) => race.location_city_id);
-
-            await preloadLocations(cityIds);
-
-            const processedRaces = await Promise.all(
-                data.map(async (race) => ({
-                    ...race,
-                    processedDate: processDate(race.race_date),
-                    location: await getLocation(race.location_city_id),
-                }))
-            );
-
-            setRaces(processedRaces);
         } catch (err) {
-            setError(err as PostgrestError);
+            // Only update error state if not aborted
+            if (!signal?.aborted) {
+                setError(
+                    err instanceof Error ? err.message : "Failed to fetch races"
+                );
+            }
         } finally {
-            setIsLoading(false);
+            // Only update loading state if not aborted
+            if (!signal?.aborted) {
+                setIsLoading(false);
+            }
         }
-    }, [getLocation, preloadLocations]);
+    }, []);
 
     useEffect(() => {
-        loadRaces();
-    }, [loadRaces]);
+        const controller = new AbortController();
+        fetchRaces(controller.signal);
 
-    return { races, error, isLoading };
+        return () => controller.abort();
+    }, [fetchRaces]);
+
+    return { races, error, isLoading, refetch: fetchRaces };
 };

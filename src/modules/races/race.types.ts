@@ -3,32 +3,32 @@ import type { DateProps } from "../../shared/types/date.types";
 export type RaceCategory = "MTB" | "Gravel" | "Road";
 export type RaceDifficulty = "easy" | "mid" | "advanced";
 
-export type Race = {
+export interface BaseRace {
     race_id: string;
-    title: string;
-    slug: string;
-    image_url: string;
-    processedDate: DateProps;
-    location: LocationProps;
-};
-
-export interface RaceProps {
-    race_id: string;
-    organizer_id: string;
     title: string;
     slug: string;
     description: string;
     race_category: RaceCategory[];
     race_difficulty: RaceDifficulty[];
+    race_date: string;
+    image_url: string;
+    location_city_id: number;
+}
+
+export interface ExtendRace extends BaseRace {
+    organizer_id: string;
     distance_km: number;
     elevation_gain_m: number;
     max_participants: number;
     registration_closes_at?: string;
-    race_date: string;
-    image_url: string;
     created_at: string;
-    location_city_id: number;
     location_goal_city?: number;
+}
+
+export interface Race
+    extends Pick<BaseRace, "race_id" | "title" | "slug" | "image_url"> {
+    processedDate: DateProps;
+    location: LocationProps;
 }
 
 export interface RaceFilters {
@@ -46,7 +46,7 @@ export type LocationProps = {
     department: string;
 };
 
-export interface RaceWithProcessedData extends RaceProps {
+export interface RaceWithProcessedData extends BaseRace {
     processedDate: DateProps;
     location: LocationProps;
 }
