@@ -133,9 +133,3 @@ export async function getRaceById(
         };
     }
 }
-
-// curl 'https://ioqibgjhwowmlnlfggoi.supabase.co/rest/v1/Races?select=race_id,title,slug,description,race_category,race_difficulty,race_date,image_url,location_city_id' \
-// -H "apikey: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlvcWliZ2pod293bWxubGZnZ29pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjEzMTIwOTcsImV4cCI6MjA3Njg4ODA5N30.ljkPydkbPdQZOnBQxsfpjXAYNRtRq-9EOOafdNseEss" \
-// -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlvcWliZ2pod293bWxubGZnZ29pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjEzMTIwOTcsImV4cCI6MjA3Njg4ODA5N30.ljkPydkbPdQZOnBQxsfpjXAYNRtRq-9EOOafdNseEss"
-
-// race_id,title,slug,description, race_category, race_difficulty, race_date, image_url,location_city_id
