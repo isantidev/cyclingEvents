@@ -4,7 +4,7 @@ import type { BaseRace, ExtendRace } from "../race.types";
 
 export async function getRacesSummary(): Promise<AppResult<BaseRace[]>> {
     try {
-        const { data, error } = await supabase.from("races").select(`
+        const { data, error } = await supabase.from("Races").select(`
                 race_id, 
                 title, 
                 slug, 
@@ -35,14 +35,14 @@ export async function getRacesSummary(): Promise<AppResult<BaseRace[]>> {
         return {
             success: false,
             data: null,
-            error: "Unexpected network failure",
+            error: `Unexpected network failure - ${JSON.stringify(error)}`,
         };
     }
 }
 
 export async function getRacesExtend(): Promise<AppResult<ExtendRace[]>> {
     try {
-        const { data, error } = await supabase.from("races").select("*");
+        const { data, error } = await supabase.from("Races").select("*");
 
         if (error) return { success: false, data: null, error: error.message };
 
@@ -70,17 +70,17 @@ export async function getRacesExtend(): Promise<AppResult<ExtendRace[]>> {
         return {
             success: false,
             data: null,
-            error: "Unexpected network failure",
+            error: `Unexpected network failure - ${JSON.stringify(error)}`,
         };
     }
 }
 
 export async function getRaceById(
-    race_id: string
+    race_id: number
 ): Promise<AppResult<BaseRace[]>> {
     try {
         const { data, error } = await supabase
-            .from("races")
+            .from("Races")
             .select(
                 `
                 race_id, 
@@ -129,7 +129,7 @@ export async function getRaceById(
         return {
             success: false,
             data: null,
-            error: "Unexpected network failure",
+            error: `Unexpected network failure - ${JSON.stringify(error)}`,
         };
     }
 }

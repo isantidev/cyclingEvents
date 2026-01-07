@@ -20,7 +20,9 @@ export async function fetchDepartments(): Promise<AppResult<Department[]>> {
         return {
             success: false,
             data: null,
-            error: "Unexpected network failure",
+            error: `Unexpected network failure - Details ${JSON.stringify(
+                error
+            )}`,
         };
     }
 }
@@ -46,7 +48,55 @@ export async function fetchCitiesByDepartment(
         return {
             success: false,
             data: null,
-            error: "Unexpected network failure",
+            error: `Unexpected network failure - Details ${JSON.stringify(
+                error
+            )}`,
+        };
+    }
+}
+
+export async function fetchDepartmentById(
+    department_id: Department["id"]
+): Promise<AppResult<Department>> {
+    try {
+        const { data, error } = await supabase
+            .from("Departments")
+            .select("id,department_name")
+            .eq("id", department_id)
+            .single();
+
+        if (error) return { success: false, data: null, error: error.message };
+
+        return { success: true, data: data, error: null };
+    } catch (error) {
+        return {
+            success: false,
+            data: null,
+            error: `Unexpected network failure - Details ${JSON.stringify(
+                error
+            )}`,
+        };
+    }
+}
+
+export async function fetchCity(city_id: City["id"]): Promise<AppResult<City>> {
+    try {
+        const { data, error } = await supabase
+            .from("Cities")
+            .select("id, city_name, department_id")
+            .eq("id", city_id)
+            .single();
+
+        if (error) return { success: false, data: null, error: error.message };
+
+        return { success: true, data: data, error: null };
+    } catch (error) {
+        return {
+            success: false,
+            data: null,
+            error: `Unexpected network failure - Details ${JSON.stringify(
+                error
+            )}`,
         };
     }
 }

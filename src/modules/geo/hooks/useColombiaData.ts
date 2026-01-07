@@ -1,9 +1,9 @@
 import { useState, useEffect, useCallback } from "react";
 import { colombiaDataService } from "../service/colombiaData.service";
-import type { Department } from "../colombiaData.types";
+import type { City, Department } from "../colombiaData.types";
 
 export function useColombiaData() {
-    const [departmetns, setDepartments] = useState<Department[]>();
+    const [departments, setDepartments] = useState<Department[]>();
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
     useEffect(() => {
@@ -25,5 +25,12 @@ export function useColombiaData() {
         return res.success ? res.data : [];
     }, []);
 
-    return { departmetns, getCities, isLoading };
+    const getCity = useCallback(async (city_id: City["id"]) => {
+        setIsLoading(true);
+        const res = await colombiaDataService.getCity(city_id);
+        setIsLoading(false);
+        return res.success ? res.data : [];
+    }, []);
+
+    return { departments, getCities, getCity, isLoading };
 }

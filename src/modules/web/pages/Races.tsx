@@ -1,5 +1,5 @@
 import Card from "@modules/web/components/Card/RaceCard";
-import { useRaces } from "@modules/races/hooks/useRaces";
+import { useRaces } from "@/modules/races/hooks/useUpcomingRaces";
 import type { Race } from "@modules/races/race.types";
 import Loading from "@shared/components/Loading";
 import ErrorMessage from "@shared/components/Error";

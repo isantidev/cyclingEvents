@@ -1,4 +1,5 @@
-import type { DateProps } from "../../shared/types/date.types";
+import type { DateProps } from "@shared/types/date.types";
+import type { City, Department } from "@modules/geo/colombiaData.types";
 
 export type RaceCategory = "MTB" | "Gravel" | "Road";
 export type RaceDifficulty = "easy" | "mid" | "advanced";
@@ -22,31 +23,32 @@ export interface ExtendRace extends BaseRace {
     max_participants: number;
     registration_closes_at?: string;
     created_at: string;
-    location_goal_city?: number;
+    location_goal_city_id?: number;
 }
 
-export interface Race
-    extends Pick<BaseRace, "race_id" | "title" | "slug" | "image_url"> {
-    processedDate: DateProps;
-    location: LocationProps;
-}
-
-export interface RaceFilters {
-    dateFrom?: string;
-    dateTo?: string;
-    department?: string;
-    city?: string;
-    category?: RaceCategory;
-    difficulty?: RaceDifficulty;
-    keyword?: string;
+export interface LocationPropsInput {
+    location_goal_city_id: number;
+    location_city_id: number;
 }
 
 export type LocationProps = {
-    city: string;
-    department: string;
+    startCity: City;
+    goalCity?: City | null;
+    startDepartment: Department;
+    goalDepartment?: Department | null;
 };
 
-export interface RaceWithProcessedData extends BaseRace {
+export interface BaseRaceProcessedData extends BaseRace {
     processedDate: DateProps;
-    location: LocationProps;
+    processedLocation: LocationProps;
+}
+
+export interface ExtendRaceProcessedData extends ExtendRace {
+    processedDate: DateProps;
+    processedLocation: LocationProps;
+}
+
+export interface UseUpcomingRacesOptions {
+    variant?: "extend" | "summary";
+    enabled?: boolean;
 }
