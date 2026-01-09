@@ -1,5 +1,5 @@
 import HeroBanner from "@modules/web/components/Hero/HeroBanner";
-import FeaturedRaces from "@modules/web/components/FeaturedRaces/FeaturedRaces";
+import { FeatureRaces } from "@modules/web/components/FeatureRaces/FeatureRaces";
 
 const HomePage = () => {
     return (
@@ -8,7 +8,7 @@ const HomePage = () => {
             <h1 className="text-5xl font-extrabold">
                 ¡Encuentra tu proximo reto!
             </h1>
-            <FeaturedRaces />
+            <FeatureRaces />
         </div>
     );
 };
