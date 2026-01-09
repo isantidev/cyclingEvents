@@ -1,15 +1,20 @@
-import type { Race } from "@shared/types/race.types";
+import type {
+    BaseRaceProcessedData,
+    ExtendRaceProcessedData,
+} from "@modules/races/race.types";
 import { Link } from "react-router";
 
-const Card = ({ race_data }: { race_data: Race }) => {
+const Card = (race_data: ExtendRaceProcessedData | BaseRaceProcessedData) => {
     const { weekday, month, day, year } = race_data.processedDate;
-    const { city, department } = race_data.location;
+    const { startCity, startDepartment } = race_data.processedLocation;
 
     const dateSpan = `${weekday.slice(0, 3)}, ${month.slice(
         0,
         3
     )} ${day}, ${year}`;
-    const locationSpan = `${city}${department ? `, ${department}` : ""}.`;
+    const locationSpan = `${startCity.city_name}${
+        startDepartment ? `- ${startDepartment.department_name}` : ""
+    }.`;
     const raceInfoSpan = `${dateSpan} - ${locationSpan}`;
 
     return (

@@ -4,6 +4,7 @@ export const webLinks: NavLink[] = [
     { to: "/", label: "Inicio" },
     { to: "/races", label: "Carreras" },
     { to: "/about", label: "Acerca de" },
+    // { to: "/*", label: "404" }
 ];
 
 export const clientLinks: NavLink[] = [
@@ -11,4 +12,5 @@ export const clientLinks: NavLink[] = [
     { to: "/client/my-races", label: "My Races" },
     { to: "/races", label: "All Races" }, // Goes back to web layout races
     { to: "/client/profile", label: "Profile" },
+    // { to: "/*", label: "404" }
 ];
